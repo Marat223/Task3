@@ -13,7 +13,7 @@
 	<jsp:attribute name="lang">RU</jsp:attribute>
 	<jsp:body>
 	    <form action="controller" method="POST">
-		<input type="hidden" name="target" value="login"/>
+		<input type="hidden" name="command" value="login"/>
 		Login<input type="text" maxlength="11" name="login" required=""/><br/>
 		Password<input type="password" maxlength="11" name="password" required=""/><br/>
 		<input type="submit" value="Send"/>
