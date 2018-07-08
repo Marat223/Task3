@@ -5,7 +5,6 @@
  */
 package command.action;
 
-import command.CommandError;
 import command.CommandLogin;
 import command.CommandLogout;
 import command.ICommand;
@@ -25,12 +24,6 @@ public enum ActionEnum {
     LOGOUT {
 	{
 	    this.command = new CommandLogout();
-	}
-
-    },
-    ERROR {
-	{
-	    this.command = new CommandError();
 	}
     };
 

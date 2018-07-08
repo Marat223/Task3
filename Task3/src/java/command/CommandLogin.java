@@ -5,6 +5,8 @@
  */
 package command;
 
+import constant.AdmissibleRequest;
+import constant.Attribute;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -15,7 +17,17 @@ public class CommandLogin implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	String page = null;
+	String login = request.getParameter(AdmissibleRequest.PARAM_NAME_LOGIN);
+	String pass = request.getParameter(AdmissibleRequest.PARAM_NAME_PASSWORD);
+	if (LoginLogic.checkLogin(login, pass)) {
+	    request.setAttribute(Attribute.ATTRIBUTE_NAME_USER, login);
+	    page = "/jsp/main.jspx";
+	} else {
+	    request.setAttribute(Attribute.ATTRIBUTE_NAME_INCORRECT_AUTHORIZATION, "Login or passwod is incorrect");
+	    page = "/jsp/login.jspx";
+	}
+	return page;
     }
 
 }

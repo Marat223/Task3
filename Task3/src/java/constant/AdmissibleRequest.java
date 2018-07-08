@@ -9,8 +9,8 @@ package constant;
  *
  * @author me
  */
-public interface Message {
+public interface AdmissibleRequest {
 
-    String ERROR_LOGIN = "Incorrect login or password";
-    String WRONG_ACTION = ": error has occurred";
+    String PARAM_NAME_LOGIN = "login";
+    String PARAM_NAME_PASSWORD = "password";
 }
