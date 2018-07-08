@@ -15,7 +15,7 @@ public class CommandError implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	return "/jsp/error.jspx";
     }
 
 }

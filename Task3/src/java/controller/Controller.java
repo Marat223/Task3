@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author me
  */
-@WebServlet(urlPatterns = {"/controller"})
+@WebServlet("/controller")
 public class Controller extends HttpServlet {
 
     /**
@@ -31,7 +31,9 @@ public class Controller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	System.out.println(">>>processRequest");
 	ActionFactory client = new ActionFactory();
+	System.out.println(">>>client.defineCommand(request)");
 	ICommand command = client.defineCommand(request);
 	getServletContext().getRequestDispatcher(command.execute(request)).forward(request, response);
     }
