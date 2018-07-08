@@ -6,6 +6,7 @@
 package command.action;
 
 import command.ICommand;
+import constant.Message;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -14,13 +15,23 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionFactory {
 
-    ICommand getCommand(HttpServletRequest req) {
-	String commandName = req.getParameter("command").toUpperCase();
+    public ICommand defineCommand(HttpServletRequest req) {
+	String action = req.getParameter("command");
 	try {
-	    return Action.valueOf(commandName).command;
+	    return ActionEnum.valueOf(action.toUpperCase()).command;
 	} catch (IllegalArgumentException e) {
+	    req.getSession().setAttribute("wrongActionMessage", action + Message.WRONG_ACTION);
 	    //TODO добавить логгер
-	    return Action.ERROR.command;
+	    return ActionEnum.ERROR.command;
 	}
+    }
+
+    public ICommand defineCommand(SessionRequestContent atribute) {
+	String action = (String) atribute.getRequestAttributes().get("command");
+	if (null != action) {
+	    return ActionEnum.valueOf(action.toUpperCase()).command;
+	}
+	//TODO добавить логгер
+	return ActionEnum.ERROR.command;
     }
 }

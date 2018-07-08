@@ -5,6 +5,8 @@
  */
 package command;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  *
  * @author me
@@ -12,7 +14,7 @@ package command;
 public class CommandError implements ICommand {
 
     @Override
-    public String execute() {
+    public String execute(HttpServletRequest request) {
 	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

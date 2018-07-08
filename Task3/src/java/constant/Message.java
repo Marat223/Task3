@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package command;
-
-import javax.servlet.http.HttpServletRequest;
+package constant;
 
 /**
  *
  * @author me
  */
-public interface ICommand {
+public interface Message {
 
-    String execute(HttpServletRequest request);
+    String ERROR_LOGIN = "Incorrect login or password";
+    String WRONG_ACTION = ": error has occurred";
 }

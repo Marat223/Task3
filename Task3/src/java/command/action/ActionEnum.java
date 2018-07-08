@@ -7,17 +7,24 @@ package command.action;
 
 import command.CommandError;
 import command.CommandLogin;
+import command.CommandLogout;
 import command.ICommand;
 
 /**
  *
  * @author me
  */
-public enum Action {
+public enum ActionEnum {
 
     LOGIN {
 	{
 	    this.command = new CommandLogin();
+	}
+
+    },
+    LOGOUT {
+	{
+	    this.command = new CommandLogout();
 	}
 
     },

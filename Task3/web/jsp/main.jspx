@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-    Document   : login
-    Created on : 06.07.2018, 12:57:57
+    Document   : main
+    Created on : 08.07.2018, 15:22:22
     Author     : me
 -->
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
     <jsp:include page="/WEB-INF/jspf/header.jspf"/>
+    ${user}, hello!
     <form action="controller" method="POST">
-	<input type="hidden" name="command" value="login"/>
-	Login<input type="text" maxlength="11" name="login" required=""/><br/>
-	Password<input type="password" maxlength="11" name="password" required=""/><br/>
-	<input type="submit" value="Send"/>
+	<input type="hidden" name="command" value="logout"/>
+	<input type="submit" value="Logout" />
     </form>
-    <br/>
-    ${errorAuthMessage}
-    <br/>
-    ${wrongActionMessage}
     <jsp:include page="/WEB-INF/jspf/footer.jspf"/>
 </jsp:root>

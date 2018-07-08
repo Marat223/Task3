@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author me
  */
-public class CommandLogin implements ICommand {
+public class CommandLogout implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	request.getSession().invalidate();
+	return "/index.jspx";
     }
 
 }

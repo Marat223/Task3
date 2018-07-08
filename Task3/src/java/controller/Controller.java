@@ -5,6 +5,8 @@
  */
 package controller;
 
+import command.ICommand;
+import command.action.ActionFactory;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +31,9 @@ public class Controller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	ActionFactory client = new ActionFactory();
+	ICommand command = client.defineCommand(request);
+	getServletContext().getRequestDispatcher(command.execute(request)).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
