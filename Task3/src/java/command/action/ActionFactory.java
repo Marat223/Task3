@@ -18,7 +18,6 @@ public class ActionFactory {
     public ICommand defineCommand(HttpServletRequest req) {
 	String action = req.getParameter(Attribute.ATTRIBUTE_NAME_COMMAND);
 	try {
-	    System.out.println(">>>COMMAND " + action);
 	    return ActionEnum.valueOf(action.toUpperCase()).command;
 	} catch (IllegalArgumentException e) {
 	    req.getSession().setAttribute(Attribute.ATTRIBUTE_NAME_WRONG_ACTION, action + ": error has occurred");
