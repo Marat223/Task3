@@ -9,9 +9,12 @@
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
     <jsp:include page="/WEB-INF/jspf/header.jspf"/>
     ${user}, hello!
+    <br/>
+    ${requestScope.uploadedSuccessfully}
     <form action="controller" method="POST">
 	<input type="hidden" name="command" value="logout"/>
 	<input type="submit" value="Logout" />
-    </form>
+    </form><br/>
+    <a href="jsp/upload.jspx">Uploading page</a>
     <jsp:include page="/WEB-INF/jspf/footer.jspf"/>
 </jsp:root>

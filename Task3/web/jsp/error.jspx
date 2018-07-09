@@ -17,8 +17,8 @@
     Exception: ${pageContext.errorData.throwable}
     <br/>
     Message: ${wrongAction}
-
-    //TODO add link to continue work
+    <br/>
+    <!--TODO add link continue to work-->
 
     <jsp:include page="/WEB-INF/jspf/footer.jspf"/>
 </jsp:root>
