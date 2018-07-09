@@ -10,11 +10,14 @@
     <jsp:include page="/WEB-INF/jspf/header.jspf"/>
     ${user}, hello!
     <br/>
-    ${requestScope.uploadState}
     <form action="controller" method="POST">
 	<input type="hidden" name="command" value="logout"/>
 	<input type="submit" value="Logout" />
     </form><br/>
-    <a href="upload.jspx">Uploading page</a>
+    ${requestScope.uploadState}
+    <form name="UploadForm" action="upload" enctype="multipart/form-data" method="POST">
+        Select file to upload: <input type="file" name="file" size="60" /><br/>
+        <br/> <input type="submit" value="Upload"/>
+    </form>
     <jsp:include page="/WEB-INF/jspf/footer.jspf"/>
 </jsp:root>
