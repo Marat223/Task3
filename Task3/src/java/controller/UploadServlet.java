@@ -34,7 +34,7 @@ public class UploadServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	String savePath = request.getServletContext().getRealPath("") + File.separator + "upload";
+	String savePath = request.getServletContext().getRealPath("") + getInitParameter("uploadFilesPath");
 	File fileSaveDir = new File(savePath);
 	if (!fileSaveDir.exists()) {
 	    fileSaveDir.mkdir();
@@ -44,7 +44,7 @@ public class UploadServlet extends HttpServlet {
 	    fileName = new File(fileName).getName();
 	    part.write(savePath + File.separator + fileName);
 	}
-	request.setAttribute(Attribute.ATTRIBUTE_NAME_UPLOADED_SUCCESSFULLY, "Upload has been done successfully!");
+	request.setAttribute(Attribute.ATTRIBUTE_NAME_UPLOAD_STATE, "Upload has been done successfully!");
 	getServletContext().getRequestDispatcher("/jsp/main.jspx").forward(request, response);
     }
 

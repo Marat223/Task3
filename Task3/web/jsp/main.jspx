@@ -10,11 +10,11 @@
     <jsp:include page="/WEB-INF/jspf/header.jspf"/>
     ${user}, hello!
     <br/>
-    ${requestScope.uploadedSuccessfully}
+    ${requestScope.uploadState}
     <form action="controller" method="POST">
 	<input type="hidden" name="command" value="logout"/>
 	<input type="submit" value="Logout" />
     </form><br/>
-    <a href="jsp/upload.jspx">Uploading page</a>
+    <a href="upload.jspx">Uploading page</a>
     <jsp:include page="/WEB-INF/jspf/footer.jspf"/>
 </jsp:root>

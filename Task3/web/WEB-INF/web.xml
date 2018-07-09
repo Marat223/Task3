@@ -16,6 +16,10 @@
     <servlet>
 	<servlet-name>Upload</servlet-name>
 	<servlet-class>controller.UploadServlet</servlet-class>
+	<init-param>
+	    <param-name>uploadFilesPath</param-name>
+	    <param-value>upload</param-value>
+	</init-param>
     </servlet>
     <servlet-mapping>
 	<servlet-name>Controller</servlet-name>

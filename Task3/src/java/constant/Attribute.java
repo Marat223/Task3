@@ -15,5 +15,5 @@ public interface Attribute {
     String ATTRIBUTE_NAME_INCORRECT_AUTHORIZATION = "incorrectAuthorizingAttemtion";
     String ATTRIBUTE_NAME_USER = "user";
     String ATTRIBUTE_NAME_COMMAND = "command";
-    String ATTRIBUTE_NAME_UPLOADED_SUCCESSFULLY = "uploadedSuccessfully";
+    String ATTRIBUTE_NAME_UPLOAD_STATE = "uploadState";
 }
