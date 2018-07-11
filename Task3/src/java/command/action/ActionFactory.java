@@ -17,22 +17,22 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionFactory {
 
     public ICommand defineCommand(HttpServletRequest req) {
-	String action = req.getParameter(Attribute.ATTRIBUTE_NAME_COMMAND);
+	String action = req.getParameter(Attribute.ATTRIBUTE_COMMAND);
 	try {
-	    return ActionEnum.valueOf(action.toUpperCase()).command;
+	    return ActionEnum.valueOf(action.toUpperCase()).getCommand();
 	} catch (IllegalArgumentException e) {
-	    req.getSession().setAttribute(Attribute.ATTRIBUTE_NAME_WRONG_ACTION, action + ": error has occurred");
+	    req.getSession().setAttribute(Attribute.ATTRIBUTE_WRONG_ACTION, action);
 	    //TODO добавить логгер
-	    return ActionEnum.ERROR.command;
+	    return ActionEnum.STUB.getCommand();
 	}
     }
 
     public ICommand defineCommand(SessionRequestContent atribute) {
-	String action = (String) atribute.getRequestAttributes().get(Attribute.ATTRIBUTE_NAME_COMMAND);
+	String action = (String) atribute.getRequestAttributes().get(Attribute.ATTRIBUTE_COMMAND);
 	if (null != action) {
-	    return ActionEnum.valueOf(action.toUpperCase()).command;
+	    return ActionEnum.valueOf(action.toUpperCase()).getCommand();
 	}
 	//TODO добавить логгер
-	return ActionEnum.ERROR.command;
+	return ActionEnum.STUB.getCommand();
     }
 }

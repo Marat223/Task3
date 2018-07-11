@@ -5,6 +5,7 @@
  */
 package command;
 
+import constant.PagePath;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -16,7 +17,7 @@ public class CommandLogout implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
 	request.getSession().invalidate();
-	return "/index.jspx";
+	return PagePath.PATH_LOGIN;
     }
 
 }

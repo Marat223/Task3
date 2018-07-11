@@ -9,8 +9,8 @@ package constant;
  *
  * @author me
  */
-public interface AdmissibleRequest {
+public class AdmissibleRequest {
 
-    String PARAM_NAME_LOGIN = "login";
-    String PARAM_NAME_PASSWORD = "password";
+    public static final String PARAM_LOGIN = "login";
+    public static final String PARAM_PASSWORD = "password";
 }

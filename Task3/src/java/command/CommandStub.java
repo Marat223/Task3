@@ -5,17 +5,18 @@
  */
 package command;
 
+import constant.PagePath;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author me
  */
-public class CommandError implements ICommand {
+public class CommandStub implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-	return "/jsp/error.jspx";
+	return PagePath.PATH_ERROR;
     }
 
 }

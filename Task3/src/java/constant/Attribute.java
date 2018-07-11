@@ -9,11 +9,11 @@ package constant;
  *
  * @author me
  */
-public interface Attribute {
+public class Attribute {
 
-    String ATTRIBUTE_NAME_WRONG_ACTION = "wrongActionMessage";
-    String ATTRIBUTE_NAME_INCORRECT_AUTHORIZATION = "incorrectAuthorizingAttemtion";
-    String ATTRIBUTE_NAME_USER = "user";
-    String ATTRIBUTE_NAME_COMMAND = "command";
-    String ATTRIBUTE_NAME_UPLOAD_STATE = "uploadState";
+    public static final String ATTRIBUTE_WRONG_ACTION = "wrongActionMessage";
+    public static final String ATTRIBUTE_INCORRECT_AUTHORIZATION = "incorrectAuthorizingAttemtion";
+    public static final String ATTRIBUTE_USER = "user";
+    public static final String ATTRIBUTE_COMMAND = "command";
+    public static final String ATTRIBUTE_UPLOAD_STATE = "uploadState";
 }

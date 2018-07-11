@@ -7,6 +7,7 @@ package command;
 
 import constant.AdmissibleRequest;
 import constant.Attribute;
+import constant.PagePath;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -18,14 +19,14 @@ public class CommandLogin implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
 	String page = null;
-	String login = request.getParameter(AdmissibleRequest.PARAM_NAME_LOGIN);
-	String pass = request.getParameter(AdmissibleRequest.PARAM_NAME_PASSWORD);
+	String login = request.getParameter(AdmissibleRequest.PARAM_LOGIN);
+	String pass = request.getParameter(AdmissibleRequest.PARAM_PASSWORD);
 	if (LoginLogic.checkLogin(login, pass)) {
-	    request.setAttribute(Attribute.ATTRIBUTE_NAME_USER, login);
-	    page = "/jsp/main.jspx";
+	    request.setAttribute(Attribute.ATTRIBUTE_USER, login);
+	    page = PagePath.PATH_MAIN;
 	} else {
-	    request.setAttribute(Attribute.ATTRIBUTE_NAME_INCORRECT_AUTHORIZATION, "Login or passwod is incorrect");
-	    page = "/jsp/login.jspx";
+	    request.setAttribute(Attribute.ATTRIBUTE_INCORRECT_AUTHORIZATION, "Login or passwod is incorrect");
+	    page = PagePath.PATH_LOGIN;
 	}
 	return page;
     }

@@ -13,19 +13,19 @@ public enum ActionEnum {
 
     LOGIN {
 	{
-	    this.command = new CommandLogin();
+	    this.setCommand(new CommandLogin());
 	}
 
     },
-    ERROR {
+    STUB {
 	{
-	    this.command = new CommandError();
+	    this.setCommand(new CommandStub());
 	}
 
     },
     LOGOUT {
 	{
-	    this.command = new CommandLogout();
+	    this.setCommand(new CommandLogout());
 	}
     };
 
@@ -35,7 +35,7 @@ public enum ActionEnum {
 
     private ICommand command;
 
-    public void setCommand(ICommand command) {
+    void setCommand(ICommand command) {
 	this.command = command;
     }
 

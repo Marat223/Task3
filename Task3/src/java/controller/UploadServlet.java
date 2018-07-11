@@ -6,6 +6,7 @@
 package controller;
 
 import constant.Attribute;
+import constant.PagePath;
 import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -44,8 +45,8 @@ public class UploadServlet extends HttpServlet {
 	    fileName = new File(fileName).getName();
 	    part.write(savePath + File.separator + fileName);
 	}
-	request.setAttribute(Attribute.ATTRIBUTE_NAME_UPLOAD_STATE, "Upload has been done successfully!");
-	getServletContext().getRequestDispatcher("/jsp/main.jspx").forward(request, response);
+	request.setAttribute(Attribute.ATTRIBUTE_UPLOAD_STATE, "Upload has been done successfully!");
+	getServletContext().getRequestDispatcher(PagePath.PATH_MAIN).forward(request, response);
     }
 
     /**
