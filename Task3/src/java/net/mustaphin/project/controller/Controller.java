@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package net.mustaphin.project.controller;
 
-import command.ICommand;
-import command.action.ActionFactory;
+import net.mustaphin.project.command.ICommand;
+import net.mustaphin.project.command.action.ActionFactory;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

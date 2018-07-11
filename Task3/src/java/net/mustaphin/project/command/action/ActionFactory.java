@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package command.action;
+package net.mustaphin.project.command.action;
 
-import command.ActionEnum;
-import command.ICommand;
-import constant.Attribute;
+import net.mustaphin.project.command.ActionEnum;
+import net.mustaphin.project.command.ICommand;
+import net.mustaphin.project.constant.Attribute;
 import javax.servlet.http.HttpServletRequest;
 
 /**

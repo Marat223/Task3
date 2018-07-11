@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package command.action;
+package net.mustaphin.project.command.action;
 
 import java.util.Enumeration;
 import java.util.HashMap;

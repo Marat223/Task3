@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package command;
-
-import javax.servlet.http.HttpServletRequest;
+package net.mustaphin.project.constant;
 
 /**
  *
  * @author me
  */
-public interface ICommand {
+public class AdmissibleRequest {
 
-    String execute(HttpServletRequest request);
+    public static final String PARAM_LOGIN = "login";
+    public static final String PARAM_PASSWORD = "password";
 }

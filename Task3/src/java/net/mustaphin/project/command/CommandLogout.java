@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package command;
+package net.mustaphin.project.command;
 
-import constant.PagePath;
+import net.mustaphin.project.constant.PagePath;
 import javax.servlet.http.HttpServletRequest;
 
 /**

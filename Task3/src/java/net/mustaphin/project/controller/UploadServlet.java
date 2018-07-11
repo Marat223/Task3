@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package net.mustaphin.project.controller;
 
-import constant.Attribute;
-import constant.PagePath;
+import net.mustaphin.project.constant.Attribute;
+import net.mustaphin.project.constant.PagePath;
 import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
