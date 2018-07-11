@@ -5,6 +5,7 @@
  */
 package command.action;
 
+import command.ActionEnum;
 import command.ICommand;
 import constant.Attribute;
 import javax.servlet.http.HttpServletRequest;

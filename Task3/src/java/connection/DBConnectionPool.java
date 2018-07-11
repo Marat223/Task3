@@ -8,14 +8,13 @@ package connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -23,17 +22,22 @@ import java.util.logging.Logger;
  */
 public class DBConnectionPool {
 
-    private static DBConnectionPool instance = null;
-    private volatile static boolean instanceCreated = false;
+    private static DBConnectionPool instance;
+    private static AtomicBoolean instanceCreated = new AtomicBoolean();
     private static Lock lock = new ReentrantLock();
     private static Condition condition = lock.newCondition();
+    private final Queue<Connection> availableConnections = new ArrayDeque<>();
+    private final String url;
+    private String user;
+    private String password;
+    private int maxConn;
 
-    public static DBConnectionPool getInstance(String URL, String user, String password, int maxConn) {
-	if (!instanceCreated) {
+    public static DBConnectionPool getInstance(String url, String user, String password, int maxConn) {
+	if (!instanceCreated.get()) {
 	    lock.lock();
-	    if (!instanceCreated) {
-		instance = new DBConnectionPool(URL, user, password, maxConn);
-		instanceCreated = true;
+	    if (!instanceCreated.get()) {
+		instance = new DBConnectionPool(url, user, password, maxConn);
+		instanceCreated.set(true);
 	    }
 	    condition.signalAll();
 	    lock.unlock();
@@ -41,14 +45,8 @@ public class DBConnectionPool {
 	return instance;
     }
 
-    private final List<Connection> CONNECTION = new ArrayList<>();
-    private String URL;
-    private String user;
-    private String password;
-    private int maxConn;
-
-    private DBConnectionPool(String URL, String user, String password, int maxConn) {
-	this.URL = URL;
+    private DBConnectionPool(String url, String user, String password, int maxConn) {
+	this.url = url;
 	this.user = user;
 	this.password = password;
 	this.maxConn = maxConn;
@@ -59,55 +57,60 @@ public class DBConnectionPool {
 	try {
 	    DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 	} catch (SQLException ex) {
-	    Logger.getLogger(DBConnectionPool.class.getName()).log(Level.SEVERE, null, ex);
+	    //TODO log4j
 	}
     }
 
     public Connection getConnection() {
-	Connection con = null;
-	if (!CONNECTION.isEmpty()) {
-	    con = CONNECTION.get(CONNECTION.size() - 1);
-	    CONNECTION.remove(con);
+	Connection connection = null;
+	if (!availableConnections.isEmpty()) {
+	    connection = availableConnections.poll();
+	    availableConnections.remove(connection);
 	    try {
-		if (con.isClosed()) {
-		    con = getConnection();
+		if (connection.isClosed()) {
+		    connection = getConnection();
 		}
 	    } catch (SQLException ex) {
-		Logger.getLogger(DBConnectionPool.class.getName()).log(Level.SEVERE, null, ex);
-		con = getConnection();
+		//TODO log4j
+		connection = getConnection();
 	    }
 	} else {
-	    con = newConnection();
+	    try {
+		condition.await();
+	    } catch (InterruptedException ex) {
+		//TODO log4j
+	    }
 	}
-	return con;
+	return connection;
     }
 
     private Connection newConnection() {
 	Connection con = null;
 	try {
-	    con = DriverManager.getConnection(URL, user, password);
+	    con = DriverManager.getConnection(url, user, password);
 	} catch (SQLException ex) {
-	    Logger.getLogger(DBConnectionPool.class.getName()).log(Level.SEVERE, null, ex);
+	    //TODO log4j
 	}
 	return con;
     }
 
     public void freeConnection(Connection con) {
 	lock.lock();
-	if ((con != null) && (CONNECTION.size()) <= maxConn) {
-	    CONNECTION.add(con);
+	if ((con != null) && (availableConnections.size()) <= maxConn) {
+	    availableConnections.add(con);
+	    condition.signal();
 	}
 	lock.unlock();
     }
 
     public void release() throws SQLException {
 	lock.lock();
-	Iterator allConnections = CONNECTION.iterator();
+	Iterator allConnections = availableConnections.iterator();
 	while (allConnections.hasNext()) {
 	    Connection con = (Connection) allConnections.next();
 	    con.close();
 	}
-	CONNECTION.clear();
+	availableConnections.clear();
 	lock.unlock();
     }
 }

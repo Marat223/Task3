@@ -3,12 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package command.action;
-
-import command.CommandError;
-import command.CommandLogin;
-import command.CommandLogout;
-import command.ICommand;
+package command;
 
 /**
  *
@@ -34,6 +29,14 @@ public enum ActionEnum {
 	}
     };
 
-    ICommand command;
+    public ICommand getCommand() {
+	return command;
+    }
+
+    private ICommand command;
+
+    public void setCommand(ICommand command) {
+	this.command = command;
+    }
 
 }
