@@ -73,9 +73,9 @@ public class DBConnectionPool {
 	    connection = availableConnections.poll();
 	    try {
 		if (connection.isClosed()) {
-		    condition.await();
+		    connection = newConnection();
 		}
-	    } catch (InterruptedException | SQLException ex) {
+	    } catch (SQLException ex) {
 		//TODO log4j
 	    }
 	}
