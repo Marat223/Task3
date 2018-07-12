@@ -63,23 +63,14 @@ public class DBConnectionPool {
 
     public Connection getConnection() {
 	Connection connection = null;
-	if (!availableConnections.isEmpty()) {
-	    connection = availableConnections.poll();
-	    availableConnections.remove(connection);
-	    try {
-		if (connection.isClosed()) {
-		    connection = getConnection();
-		}
-	    } catch (SQLException ex) {
-		//TODO log4j
-		connection = getConnection();
-	    }
-	} else {
+	if (availableConnections.isEmpty()) {
 	    try {
 		condition.await();
 	    } catch (InterruptedException ex) {
 		//TODO log4j
 	    }
+	} else {
+	    connection = availableConnections.poll();
 	}
 	return connection;
     }
