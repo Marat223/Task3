@@ -73,11 +73,10 @@ public class DBConnectionPool {
 	    connection = availableConnections.poll();
 	    try {
 		if (connection.isClosed()) {
-		    //TODO что делать если timeout
+		    condition.await();
 		}
-	    } catch (SQLException ex) {
+	    } catch (InterruptedException | SQLException ex) {
 		//TODO log4j
-		connection = getConnection();
 	    }
 	} else {
 	    connection = availableConnections.poll();
@@ -86,13 +85,13 @@ public class DBConnectionPool {
     }
 
     private Connection newConnection() {
-	Connection con = null;
+	Connection connection = null;
 	try {
-	    con = DriverManager.getConnection(url, user, password);
+	    connection = DriverManager.getConnection(url, user, password);
 	} catch (SQLException ex) {
 	    //TODO log4j
 	}
-	return con;
+	return connection;
     }
 
     public void freeConnection(Connection connection) {
