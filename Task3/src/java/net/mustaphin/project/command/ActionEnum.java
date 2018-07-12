@@ -11,32 +11,18 @@ package net.mustaphin.project.command;
  */
 public enum ActionEnum {
 
-    LOGIN {
-	{
-	    this.setCommand(new CommandLogin());
-	}
+    LOGIN(new CommandLogin()),
+    STUB(new CommandStub()),
+    LOGOUT(new CommandLogout());
 
-    },
-    STUB {
-	{
-	    this.setCommand(new CommandStub());
-	}
-
-    },
-    LOGOUT {
-	{
-	    this.setCommand(new CommandLogout());
-	}
-    };
+    ActionEnum(ICommand iCommand) {
+	this.command = iCommand;
+    }
 
     public ICommand getCommand() {
 	return command;
     }
 
     private ICommand command;
-
-    void setCommand(ICommand command) {
-	this.command = command;
-    }
 
 }
