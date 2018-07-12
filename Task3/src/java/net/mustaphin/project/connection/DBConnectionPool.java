@@ -71,6 +71,16 @@ public class DBConnectionPool {
 	    }
 	} else {
 	    connection = availableConnections.poll();
+	    try {
+		if (connection.isClosed()) {
+		    //TODO что делать если timeout
+		}
+	    } catch (SQLException ex) {
+		//TODO log4j
+		connection = getConnection();
+	    }
+	} else {
+	    connection = availableConnections.poll();
 	}
 	return connection;
     }
@@ -85,10 +95,10 @@ public class DBConnectionPool {
 	return con;
     }
 
-    public void freeConnection(Connection con) {
+    public void freeConnection(Connection connection) {
 	lock.lock();
-	if ((con != null) && (availableConnections.size()) <= maxConn) {
-	    availableConnections.add(con);
+	if ((connection != null) && (availableConnections.size()) <= maxConn) {
+	    availableConnections.add(connection);
 	    condition.signal();
 	}
 	lock.unlock();
