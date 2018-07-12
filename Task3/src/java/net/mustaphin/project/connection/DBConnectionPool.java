@@ -78,8 +78,6 @@ public class DBConnectionPool {
 	    } catch (InterruptedException | SQLException ex) {
 		//TODO log4j
 	    }
-	} else {
-	    connection = availableConnections.poll();
 	}
 	return connection;
     }
